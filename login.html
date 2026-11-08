@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src https://elmo-backend.orb-hq.workers.dev; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<title>Elmo – Login</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%23e0261d'/%3E%3Crect x='5' y='5' width='6' height='5' rx='2' fill='%23ff9a1f'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#180c0d;--card:#28141a;--card2:#351a20;--line:#4e262c;--ink:#fff4ea;--soft:#e4c7b8;--mute:#bd9a8e;--red:#e0261d;--orange:#ff9a1f;--font:"Arial Rounded MT Bold","Nunito","Trebuchet MS",system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font:16px/1.45 var(--font)}
+.fur{background-color:var(--red);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9 .05' numOctaves='3' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 -.2'/%3E%3C/filter%3E%3Crect width='320' height='320' filter='url(%23f)'/%3E%3C/svg%3E");padding:26px 16px}
+.fur a{color:#fff;text-decoration:none}
+h1{margin:0 auto;max-width:460px;font-size:56px;line-height:1;text-shadow:0 3px 0 #8e120d}
+main{max-width:460px;margin:0 auto;padding:30px 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px}
+h2{margin:0 0 14px;font-size:24px}
+label{display:block;margin:0 0 6px;color:var(--soft)}
+input{width:100%;font:inherit;color:var(--ink);background:var(--card2);border:2px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:12px}
+input:focus{outline:none;border-color:var(--orange)}
+button{font:inherit;cursor:pointer;border:0;border-radius:12px;padding:11px 15px}
+.main{width:100%;background:var(--orange);color:#2a1100}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.alt{background:var(--card2);color:var(--ink);border:1px solid var(--line)}
+button:disabled{opacity:.55;cursor:wait}
+#msg{min-height:24px;margin:13px 0 0;color:var(--soft);overflow-wrap:anywhere}
+#msg.bad{color:#ff9c90}
+.role{color:var(--soft);margin:-8px 0 14px}
+.sep{height:1px;background:var(--line);margin:16px 0}
+[hidden]{display:none!important}
+.back{display:block;margin-top:16px;color:var(--soft)}
+</style>
+</head>
+<body>
+<header class="fur"><h1><a href="./">ELMO</a></h1></header>
+<main>
+  <form id="login" class="card">
+    <h2>Login</h2>
+    <label for="pw">Passwort</label>
+    <input id="pw" type="password" autocomplete="current-password" required>
+    <button class="main" type="submit">Anmelden</button>
+    <p id="loginMsg" role="status" style="min-height:24px;margin:13px 0 0;color:#ff9c90"></p>
+  </form>
+  <section id="panel" class="card" hidden>
+    <h2 id="title">Whitelist</h2>
+    <p id="role" class="role"></p>
+    <form id="nameForm">
+      <label for="name">Minecraft-Name</label>
+      <input id="name" autocomplete="off" spellcheck="false" maxlength="16" required>
+      <button class="main" type="submit">Zur Whitelist hinzufügen</button>
+    </form>
+    <div id="admin" hidden>
+      <div class="sep"></div>
+      <div class="btns">
+        <button class="alt" type="button" data-a="whitelist_remove" data-name="1">Entfernen</button>
+        <button class="alt" type="button" data-a="kick" data-name="1">Kicken</button>
+        <button class="alt" type="button" data-a="whitelist_list">Liste anzeigen</button>
+        <button class="alt" type="button" id="logout">Abmelden</button>
+        <button class="alt" type="button" data-a="whitelist_on">Whitelist an</button>
+        <button class="alt" type="button" data-a="whitelist_off">Whitelist aus</button>
+      </div>
+    </div>
+    <button class="alt" type="button" id="logout2" style="width:100%;margin-top:10px">Abmelden</button>
+    <p id="msg" role="status"></p>
+  </section>
+  <a class="back" href="./">Zurück zu den Stats</a>
+</main>
+<script>
+const API='https://elmo-backend.orb-hq.workers.dev/api';
+const $=id=>document.getElementById(id);
+let password='';
+const ERR={400:'Das ist kein gültiger Minecraft-Name.',401:'Falsches Passwort.',403:'Dafür fehlt die Berechtigung.',502:'Der Server ist gerade nicht erreichbar.'};
+async function call(action,name){
+  const body={password,action};if(name)body.name=name;
+  const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok)throw new Error(ERR[r.status]||'Das hat gerade nicht geklappt.');
+  return d;
+}
+function nice(t){
+  let m;
+  if(m=t.match(/^Added (\S+) to the whitelist/))return m[1]+' steht jetzt auf der Whitelist.';
+  if(m=t.match(/^Removed (\S+) from the whitelist/))return m[1]+' wurde von der Whitelist entfernt.';
+  if(/already whitelisted/.test(t))return 'Der Spieler steht schon auf der Whitelist.';
+  if(/not whitelisted/.test(t))return 'Der Spieler steht nicht auf der Whitelist.';
+  if(/does not exist|That player/.test(t))return 'Diesen Minecraft-Namen gibt es nicht.';
+  if(/No player was found/.test(t))return 'Dieser Spieler ist gerade nicht online.';
+  if(m=t.match(/^Kicked (\S+)/))return m[1]+' wurde gekickt.';
+  if(/no whitelisted players/.test(t))return 'Die Whitelist ist leer.';
+  if(m=t.match(/whitelisted player\(s\): (.*)$/))return 'Auf der Whitelist: '+m[1];
+  if(/Whitelist is now turned on/.test(t))return 'Die Whitelist ist jetzt an.';
+  if(/Whitelist is now turned off/.test(t))return 'Die Whitelist ist jetzt aus.';
+  if(/already (on|off)|already turned/.test(t))return 'Die Whitelist war schon so eingestellt.';
+  return t||'Erledigt.';
+}
+function show(t,bad){const m=$('msg');m.textContent=t;m.className=bad?'bad':''}
+function busy(on){document.querySelectorAll('#panel button').forEach(b=>b.disabled=on)}
+async function run(action,name){
+  busy(true);show('Einen Moment …');
+  try{const d=await call(action,name);show(nice(d.message||''))}catch(e){show(e.message,true)}
+  busy(false);
+}
+$('login').addEventListener('submit',async e=>{
+  e.preventDefault();
+  password=$('pw').value;$('loginMsg').textContent='';
+  try{
+    const d=await call('login');
+    $('pw').value='';$('login').hidden=true;$('panel').hidden=false;
+    const admin=d.role==='admin';
+    $('admin').hidden=!admin;$('logout2').hidden=admin;
+    $('title').textContent=admin?'Admin':'Whitelist';
+    $('role').textContent=admin?'Du kannst Spieler verwalten.':'Hier kannst du Freunde zur Whitelist hinzufügen.';
+    $('name').focus();
+  }catch(err){password='';$('loginMsg').textContent=err.message}
+});
+$('nameForm').addEventListener('submit',e=>{e.preventDefault();run('whitelist_add',$('name').value.trim())});
+document.querySelectorAll('[data-a]').forEach(b=>b.addEventListener('click',()=>{
+  const name=b.dataset.name?$('name').value.trim():'';
+  if(b.dataset.name&&!name){show('Trag zuerst einen Minecraft-Namen ein.',true);return}
+  run(b.dataset.a,name);
+}));
+function logout(){password='';location.reload()}
+$('logout').addEventListener('click',logout);$('logout2').addEventListener('click',logout);
+</script>
+</body>
+</html>
