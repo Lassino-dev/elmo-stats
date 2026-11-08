@@ -1,6 +1,6 @@
 {
     "server":  "Elmo",
-    "updated":  "2026-11-08T15:02:25.1492573Z",
+    "updated":  "2026-11-08T16:31:55.1442302Z",
     "players":  [
                     {
                         "uuid":  "e193b777-29a7-4c37-81c7-e53402d41203",
@@ -8,13 +8,13 @@
                         "deaths":  0,
                         "playerKills":  0,
                         "mobKills":  0,
-                        "hours":  0.1,
-                        "damageDealt":  0,
-                        "damageTaken":  0,
-                        "jumps":  33,
-                        "elytraKm":  1.8,
-                        "walkKm":  0.1,
-                        "minedAll":  0,
+                        "hours":  0.3,
+                        "damageDealt":  8,
+                        "damageTaken":  5,
+                        "jumps":  315,
+                        "elytraKm":  2.9,
+                        "walkKm":  0.6,
+                        "minedAll":  2,
                         "diamondOre":  0,
                         "diamondBlocks":  0,
                         "diamondsInv":  0,
@@ -25,6 +25,34 @@
                                      ],
                         "killed":  [
 
+                                   ]
+                    },
+                    {
+                        "uuid":  "186e420c-d77c-42b8-9672-9d1c1f2a695f",
+                        "name":  "Kigon15",
+                        "deaths":  0,
+                        "playerKills":  0,
+                        "mobKills":  1,
+                        "hours":  0.2,
+                        "damageDealt":  16,
+                        "damageTaken":  8,
+                        "jumps":  195,
+                        "elytraKm":  1.8,
+                        "walkKm":  0.5,
+                        "minedAll":  0,
+                        "diamondOre":  0,
+                        "diamondBlocks":  0,
+                        "diamondsInv":  0,
+                        "diamondsEnder":  0,
+                        "diamondsOwned":  0,
+                        "killedBy":  [
+
+                                     ],
+                        "killed":  [
+                                       {
+                                           "id":  "squid",
+                                           "n":  1
+                                       }
                                    ]
                     }
                 ],
