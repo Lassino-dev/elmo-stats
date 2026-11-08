@@ -1,54 +1,421 @@
 {
     "server":  "Elmo",
-    "updated":  "2026-11-08T16:31:55.1442302Z",
+    "updated":  "2026-11-08T22:46:33.7093092Z",
     "players":  [
                     {
-                        "uuid":  "e193b777-29a7-4c37-81c7-e53402d41203",
-                        "name":  "Lassino",
-                        "deaths":  0,
+                        "uuid":  "1803a2fe-8b86-4ef4-b16e-57e5438136da",
+                        "name":  "1Elvin",
+                        "deaths":  8,
                         "playerKills":  0,
                         "mobKills":  0,
-                        "hours":  0.3,
-                        "damageDealt":  8,
-                        "damageTaken":  5,
-                        "jumps":  315,
-                        "elytraKm":  2.9,
-                        "walkKm":  0.6,
-                        "minedAll":  2,
+                        "hours":  0.8,
+                        "damageDealt":  1,
+                        "damageTaken":  208,
+                        "jumps":  911,
+                        "elytraKm":  32.4,
+                        "walkKm":  1.8,
+                        "minedAll":  59,
                         "diamondOre":  0,
                         "diamondBlocks":  0,
                         "diamondsInv":  0,
                         "diamondsEnder":  0,
                         "diamondsOwned":  0,
                         "killedBy":  [
-
+                                         {
+                                             "id":  "zombie",
+                                             "n":  1
+                                         },
+                                         {
+                                             "id":  "drowned",
+                                             "n":  1
+                                         },
+                                         {
+                                             "id":  "player",
+                                             "n":  1
+                                         }
                                      ],
                         "killed":  [
 
                                    ]
                     },
                     {
+                        "uuid":  "e193b777-29a7-4c37-81c7-e53402d41203",
+                        "name":  "Lassino",
+                        "deaths":  9,
+                        "playerKills":  1,
+                        "mobKills":  206,
+                        "hours":  4.3,
+                        "damageDealt":  3345,
+                        "damageTaken":  1177,
+                        "jumps":  6727,
+                        "elytraKm":  13.3,
+                        "walkKm":  13,
+                        "minedAll":  989,
+                        "diamondOre":  42,
+                        "diamondBlocks":  0,
+                        "diamondsInv":  1,
+                        "diamondsEnder":  0,
+                        "diamondsOwned":  1,
+                        "killedBy":  [
+                                         {
+                                             "id":  "skeleton",
+                                             "n":  4
+                                         },
+                                         {
+                                             "id":  "husk",
+                                             "n":  1
+                                         },
+                                         {
+                                             "id":  "creeper",
+                                             "n":  1
+                                         },
+                                         {
+                                             "id":  "player",
+                                             "n":  1
+                                         }
+                                     ],
+                        "killed":  [
+                                       {
+                                           "id":  "skeleton",
+                                           "n":  44
+                                       },
+                                       {
+                                           "id":  "husk",
+                                           "n":  42
+                                       },
+                                       {
+                                           "id":  "zombie",
+                                           "n":  37
+                                       },
+                                       {
+                                           "id":  "cave_spider",
+                                           "n":  27
+                                       },
+                                       {
+                                           "id":  "slime",
+                                           "n":  13
+                                       },
+                                       {
+                                           "id":  "pig",
+                                           "n":  9
+                                       },
+                                       {
+                                           "id":  "breeze",
+                                           "n":  8
+                                       },
+                                       {
+                                           "id":  "cow",
+                                           "n":  7
+                                       },
+                                       {
+                                           "id":  "creeper",
+                                           "n":  4
+                                       },
+                                       {
+                                           "id":  "sheep",
+                                           "n":  4
+                                       },
+                                       {
+                                           "id":  "silverfish",
+                                           "n":  4
+                                       },
+                                       {
+                                           "id":  "spider",
+                                           "n":  1
+                                       },
+                                       {
+                                           "id":  "donkey",
+                                           "n":  1
+                                       },
+                                       {
+                                           "id":  "iron_golem",
+                                           "n":  1
+                                       }
+                                   ]
+                    },
+                    {
+                        "uuid":  "a4561446-645f-445b-a175-7b283b2fa910",
+                        "name":  "Noelex1337",
+                        "deaths":  27,
+                        "playerKills":  0,
+                        "mobKills":  279,
+                        "hours":  2.6,
+                        "damageDealt":  3183,
+                        "damageTaken":  1660,
+                        "jumps":  3400,
+                        "elytraKm":  0,
+                        "walkKm":  7,
+                        "minedAll":  619,
+                        "diamondOre":  0,
+                        "diamondBlocks":  0,
+                        "diamondsInv":  3,
+                        "diamondsEnder":  0,
+                        "diamondsOwned":  3,
+                        "killedBy":  [
+                                         {
+                                             "id":  "skeleton",
+                                             "n":  10
+                                         },
+                                         {
+                                             "id":  "drowned",
+                                             "n":  5
+                                         },
+                                         {
+                                             "id":  "stray",
+                                             "n":  5
+                                         },
+                                         {
+                                             "id":  "cave_spider",
+                                             "n":  2
+                                         },
+                                         {
+                                             "id":  "husk",
+                                             "n":  2
+                                         },
+                                         {
+                                             "id":  "slime",
+                                             "n":  2
+                                         },
+                                         {
+                                             "id":  "zombie",
+                                             "n":  1
+                                         }
+                                     ],
+                        "killed":  [
+                                       {
+                                           "id":  "stray",
+                                           "n":  92
+                                       },
+                                       {
+                                           "id":  "slime",
+                                           "n":  61
+                                       },
+                                       {
+                                           "id":  "zombie",
+                                           "n":  36
+                                       },
+                                       {
+                                           "id":  "cave_spider",
+                                           "n":  24
+                                       },
+                                       {
+                                           "id":  "silverfish",
+                                           "n":  21
+                                       },
+                                       {
+                                           "id":  "breeze",
+                                           "n":  19
+                                       },
+                                       {
+                                           "id":  "skeleton",
+                                           "n":  13
+                                       },
+                                       {
+                                           "id":  "husk",
+                                           "n":  2
+                                       },
+                                       {
+                                           "id":  "villager",
+                                           "n":  2
+                                       },
+                                       {
+                                           "id":  "pig",
+                                           "n":  2
+                                       },
+                                       {
+                                           "id":  "iron_golem",
+                                           "n":  1
+                                       },
+                                       {
+                                           "id":  "drowned",
+                                           "n":  1
+                                       },
+                                       {
+                                           "id":  "spider",
+                                           "n":  1
+                                       }
+                                   ]
+                    },
+                    {
+                        "uuid":  "4038575f-c0a4-4a05-9f3b-356f8f9a6c3b",
+                        "name":  "NonoKiller2000",
+                        "deaths":  19,
+                        "playerKills":  1,
+                        "mobKills":  229,
+                        "hours":  3.7,
+                        "damageDealt":  2336,
+                        "damageTaken":  995,
+                        "jumps":  5012,
+                        "elytraKm":  1.6,
+                        "walkKm":  16.1,
+                        "minedAll":  1113,
+                        "diamondOre":  11,
+                        "diamondBlocks":  0,
+                        "diamondsInv":  11,
+                        "diamondsEnder":  0,
+                        "diamondsOwned":  11,
+                        "killedBy":  [
+                                         {
+                                             "id":  "skeleton",
+                                             "n":  9
+                                         },
+                                         {
+                                             "id":  "husk",
+                                             "n":  3
+                                         },
+                                         {
+                                             "id":  "breeze",
+                                             "n":  1
+                                         }
+                                     ],
+                        "killed":  [
+                                       {
+                                           "id":  "skeleton",
+                                           "n":  41
+                                       },
+                                       {
+                                           "id":  "sheep",
+                                           "n":  27
+                                       },
+                                       {
+                                           "id":  "husk",
+                                           "n":  19
+                                       },
+                                       {
+                                           "id":  "slime",
+                                           "n":  19
+                                       },
+                                       {
+                                           "id":  "cow",
+                                           "n":  16
+                                       },
+                                       {
+                                           "id":  "chicken",
+                                           "n":  12
+                                       },
+                                       {
+                                           "id":  "zombie",
+                                           "n":  10
+                                       },
+                                       {
+                                           "id":  "cave_spider",
+                                           "n":  9
+                                       },
+                                       {
+                                           "id":  "pig",
+                                           "n":  9
+                                       },
+                                       {
+                                           "id":  "spider",
+                                           "n":  7
+                                       },
+                                       {
+                                           "id":  "rabbit",
+                                           "n":  5
+                                       },
+                                       {
+                                           "id":  "breeze",
+                                           "n":  4
+                                       },
+                                       {
+                                           "id":  "creeper",
+                                           "n":  3
+                                       },
+                                       {
+                                           "id":  "bat",
+                                           "n":  1
+                                       }
+                                   ]
+                    },
+                    {
                         "uuid":  "186e420c-d77c-42b8-9672-9d1c1f2a695f",
                         "name":  "Kigon15",
-                        "deaths":  0,
-                        "playerKills":  0,
-                        "mobKills":  1,
-                        "hours":  0.2,
-                        "damageDealt":  16,
-                        "damageTaken":  8,
-                        "jumps":  195,
-                        "elytraKm":  1.8,
-                        "walkKm":  0.5,
-                        "minedAll":  0,
-                        "diamondOre":  0,
+                        "deaths":  6,
+                        "playerKills":  1,
+                        "mobKills":  202,
+                        "hours":  3.9,
+                        "damageDealt":  2485,
+                        "damageTaken":  1078,
+                        "jumps":  4859,
+                        "elytraKm":  15.8,
+                        "walkKm":  10.5,
+                        "minedAll":  877,
+                        "diamondOre":  3,
                         "diamondBlocks":  0,
                         "diamondsInv":  0,
                         "diamondsEnder":  0,
                         "diamondsOwned":  0,
                         "killedBy":  [
-
+                                         {
+                                             "id":  "skeleton",
+                                             "n":  2
+                                         },
+                                         {
+                                             "id":  "husk",
+                                             "n":  1
+                                         },
+                                         {
+                                             "id":  "player",
+                                             "n":  1
+                                         }
                                      ],
                         "killed":  [
+                                       {
+                                           "id":  "skeleton",
+                                           "n":  54
+                                       },
+                                       {
+                                           "id":  "sheep",
+                                           "n":  28
+                                       },
+                                       {
+                                           "id":  "cave_spider",
+                                           "n":  23
+                                       },
+                                       {
+                                           "id":  "zombie",
+                                           "n":  21
+                                       },
+                                       {
+                                           "id":  "husk",
+                                           "n":  21
+                                       },
+                                       {
+                                           "id":  "cow",
+                                           "n":  10
+                                       },
+                                       {
+                                           "id":  "pig",
+                                           "n":  9
+                                       },
+                                       {
+                                           "id":  "slime",
+                                           "n":  8
+                                       },
+                                       {
+                                           "id":  "chicken",
+                                           "n":  7
+                                       },
+                                       {
+                                           "id":  "spider",
+                                           "n":  7
+                                       },
+                                       {
+                                           "id":  "breeze",
+                                           "n":  4
+                                       },
+                                       {
+                                           "id":  "silverfish",
+                                           "n":  3
+                                       },
+                                       {
+                                           "id":  "creeper",
+                                           "n":  2
+                                       },
+                                       {
+                                           "id":  "donkey",
+                                           "n":  1
+                                       },
                                        {
                                            "id":  "squid",
                                            "n":  1
@@ -57,6 +424,15 @@
                     }
                 ],
     "pairs":  [
-
+                  {
+                      "killer":  "Lassino",
+                      "victim":  "1Elvin",
+                      "n":  1
+                  },
+                  {
+                      "killer":  "Kigon15",
+                      "victim":  "Lassino",
+                      "n":  1
+                  }
               ]
 }
