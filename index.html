@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Elmo – Server-Stats</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%23e0261d'/%3E%3Crect x='5' y='5' width='6' height='5' rx='2' fill='%23ff9a1f'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#180c0d;--card:#28141a;--card2:#351a20;--line:#4e262c;
+  --ink:#fff4ea;--soft:#e4c7b8;--mute:#bd9a8e;
+  --red:#e0261d;--bar:#f4493d;--orange:#ff9a1f;--gold:#ffc83d;
+  --font:"Arial Rounded MT Bold","Nunito","Trebuchet MS",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 var(--font)}
+.fur{position:relative;background-color:var(--red);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9 .05' numOctaves='3' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 -.2'/%3E%3C/filter%3E%3Crect width='320' height='320' filter='url(%23f)'/%3E%3C/svg%3E")}
+header.fur{padding:40px 16px 62px;overflow:hidden}
+header.fur::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:24px;
+  background:linear-gradient(135deg,var(--bg) 50%,transparent 50%) 0 0/26px 24px,linear-gradient(225deg,var(--bg) 50%,transparent 50%) 0 0/26px 24px;transform:scaleY(-1)}
+.wrap{max-width:1120px;margin:0 auto}
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
+h1{margin:0;font-size:clamp(84px,21vw,190px);line-height:.86;letter-spacing:.01em;color:#fff;text-shadow:0 5px 0 #8e120d,0 12px 26px rgba(50,0,0,.55)}
+.sub{margin:16px 0 0;font-size:clamp(18px,3vw,25px);color:#ffe9c9}
+.sub b{color:var(--ink);background:var(--orange);color:#2a1100;padding:2px 12px;border-radius:999px}
+.hero{height:clamp(170px,27vw,270px);width:auto;flex:none;filter:drop-shadow(0 12px 16px rgba(40,0,0,.55));image-rendering:pixelated}
+main{padding:12px 16px 56px}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:0 0 42px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:15px 16px}
+.tile .n{display:block;font-size:clamp(28px,4vw,40px);line-height:1.1;font-variant-numeric:tabular-nums}
+.tile .l{color:var(--soft);font-size:14.5px}
+h2{font-size:clamp(25px,4vw,34px);margin:0 0 16px}
+section{margin-bottom:46px}
+.boards{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.board{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:17px 17px 13px;min-width:0}
+.board h3{margin:0 0 11px;font-size:18px}
+.rows{list-style:none;margin:0;padding:0}
+.row{display:grid;grid-template-columns:24px 32px minmax(0,1fr) auto;gap:9px;align-items:center;padding:6px 0}
+.rk{color:var(--mute);text-align:center;font-variant-numeric:tabular-nums}
+.first .rk{color:var(--gold)}
+.row img{width:32px;height:32px;border-radius:7px;image-rendering:pixelated;background:var(--card2)}
+.nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.track{display:block;height:7px;margin-top:4px;border-radius:4px;background:rgba(255,255,255,.09)}
+.track i{display:block;height:100%;min-width:0;border-radius:4px;background:var(--bar)}
+.val{font-size:18px;font-variant-numeric:tabular-nums}
+.empty{color:var(--mute);padding:6px 0 11px}
+.players{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.pl{display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px}
+.pl>img{width:96px;height:auto;align-self:start;image-rendering:pixelated}
+.pl h3{margin:0;font-size:25px;overflow-wrap:anywhere}
+.pl .meta{color:var(--soft);font-size:14.5px;margin-bottom:11px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.mini{background:var(--card2);border-radius:12px;padding:8px 9px;min-width:0}
+.mini b{display:block;font-size:19px;font-weight:400;font-variant-numeric:tabular-nums}
+.mini span{color:var(--soft);font-size:12.5px;line-height:1.2;display:block}
+.who{margin:12px 0 0}
+.who h4{margin:0 0 6px;font-size:14.5px;font-weight:400;color:var(--soft)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--card2);border-radius:999px;padding:3px 11px;font-size:14px}
+.chip em{font-style:normal;color:var(--orange);margin-left:4px}
+.tblw{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:8px 18px;overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:10px 6px;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+th{color:var(--soft);font-weight:400;font-size:14.5px}
+td.c,th.c{text-align:right;font-variant-numeric:tabular-nums}
+footer{color:var(--mute);font-size:14px;max-width:1120px;margin:0 auto;padding:0 16px 40px}
+footer p{margin:0 0 6px}
+#err{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;display:none}
+@media(max-width:820px){.tiles{grid-template-columns:repeat(2,1fr)}.tiles .tile:first-child{grid-column:1/-1}}
+@media(max-width:520px){.boards,.players{grid-template-columns:minmax(0,1fr)}.pl{grid-template-columns:70px minmax(0,1fr);gap:12px;padding:15px}.pl>img{width:70px}header.fur{padding-top:28px}}
+</style>
+</head>
+<body>
+<header class="fur"><div class="wrap top">
+  <div><h1>ELMO</h1><p class="sub"><b>Server-Stats</b> &nbsp;Wer ist hier der Größte?</p></div>
+  <img id="hero" class="hero" alt="" hidden>
+</div></header>
+<main><div class="wrap">
+  <div id="err">Die Stats konnten gerade nicht geladen werden.</div>
+  <div id="tiles" class="tiles"></div>
+  <section><h2>Bestenlisten</h2><div id="boards" class="boards"></div></section>
+  <section><h2>Wer hat wen erwischt?</h2><div id="pairs" class="tblw"></div></section>
+  <section><h2>Spieler</h2><div id="players" class="players"></div></section>
+</div></main>
+<footer>
+  <p id="stand"></p>
+  <p>Diamanten im Besitz zählt Inventar und Enderchest, auch in Shulker-Kisten. Ein Diamantblock zählt als 9. Was in normalen Kisten liegt, ist nicht enthalten.</p>
+  <p>Private Fan-Seite für einen Minecraft-Server unter Freunden. Keine Cookies, kein Tracking.</p>
+</footer>
+<script>
+const $=id=>document.getElementById(id);
+const fmt=n=>Number(n).toLocaleString('de-DE');
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const MOBS={zombie:'Zombie',husk:'Wüstenzombie',drowned:'Ertrunkener',skeleton:'Skelett',stray:'Eiswanderer',creeper:'Creeper',spider:'Spinne',cave_spider:'Höhlenspinne',enderman:'Enderman',witch:'Hexe',blaze:'Lohe',wither_skeleton:'Witherskelett',wither:'Wither',ender_dragon:'Enderdrache',piglin:'Piglin',piglin_brute:'Piglin-Rohling',zombified_piglin:'Zombifizierter Piglin',ghast:'Ghast',slime:'Schleim',magma_cube:'Magmawürfel',phantom:'Phantom',pillager:'Plünderer',vindicator:'Diener',evoker:'Magier',ravager:'Verwüster',guardian:'Wächter',elder_guardian:'Großer Wächter',silverfish:'Silberfischchen',warden:'Wärter',bee:'Biene',wolf:'Wolf',iron_golem:'Eisengolem',breeze:'Böe',bogged:'Sumpfskelett',hoglin:'Hoglin',shulker:'Shulker',llama:'Lama',polar_bear:'Eisbär',goat:'Ziege'};
+const mob=id=>MOBS[id]||id.replace(/_/g,' ').replace(/^./,c=>c.toUpperCase());
+const avatar=(p,kind)=>`data/avatars/${p.uuid}.${kind}.png`;
+const BOARDS=[
+ ['Meiste PvP-Kills','playerKills',v=>fmt(v)],
+ ['Meiste Tode','deaths',v=>fmt(v)],
+ ['Diamantblöcke abgebaut','diamondBlocks',v=>fmt(v)],
+ ['Diamanterz abgebaut','diamondOre',v=>fmt(v)],
+ ['Diamanten im Besitz','diamondsOwned',v=>fmt(v)],
+ ['Längste Spielzeit','hours',v=>fmt(v)+' h'],
+ ['Meiste Mob-Kills','mobKills',v=>fmt(v)],
+ ['Blöcke abgebaut','minedAll',v=>fmt(v)],
+ ['Elytra-Kilometer','elytraKm',v=>fmt(v)+' km'],
+];
+function tile(n,l){const d=el('div','tile');d.append(el('span','n',n),el('span','l',l));return d}
+function board([title,key,show],ps){
+  const b=el('article','board');b.append(el('h3',null,title));
+  const sorted=[...ps].sort((a,c)=>c[key]-a[key]).filter(p=>p[key]>0).slice(0,10);
+  if(!sorted.length){b.append(el('p','empty','Noch keine Einträge.'));return b}
+  const max=sorted[0][key],ol=el('ol','rows');
+  sorted.forEach((p,i)=>{
+    const li=el('li','row'+(i==0?' first':''));
+    const img=el('img');img.src=avatar(p,'avatar');img.alt='';img.loading='lazy';
+    const mid=el('div');mid.append(el('div','nm',p.name));
+    const t=el('span','track');const f=el('i');f.style.width=Math.max(3,p[key]/max*100)+'%';t.append(f);mid.append(t);
+    li.append(el('span','rk',i+1),img,mid,el('span','val',show(p[key])));li.title=p.name+': '+show(p[key]);
+    ol.append(li);
+  });b.append(ol);return b;
+}
+function who(title,arr){
+  const d=el('div','who');d.append(el('h4',null,title));
+  if(!arr.length){const c=el('div','chips');c.append(el('span','chip','Niemand'));d.append(c);return d}
+  const c=el('div','chips');
+  arr.slice(0,6).forEach(x=>{const s=el('span','chip',x.label);s.append(el('em',null,fmt(x.n)+'×'));c.append(s)});
+  d.append(c);return d;
+}
+function player(p,pairs){
+  const a=el('article','pl');
+  const img=el('img');img.src=avatar(p,'body');img.alt='Skin von '+p.name;img.loading='lazy';
+  const b=el('div');b.append(el('h3',null,p.name),el('div','meta',fmt(p.hours)+' Stunden gespielt'));
+  const g=el('div','grid');
+  [['Kills',p.playerKills],['Tode',p.deaths],['Mob-Kills',p.mobKills],['Diamantblöcke abgebaut',p.diamondBlocks],['Diamanterz abgebaut',p.diamondOre],['Diamanten im Besitz',p.diamondsOwned]]
+    .forEach(([l,v])=>{const m=el('div','mini');m.append(el('b',null,fmt(v)),el('span',null,l));g.append(m)});
+  b.append(g);
+  const byP=pairs.filter(x=>x.victim==p.name).map(x=>({label:x.killer,n:x.n}));
+  const byM=(p.killedBy||[]).filter(x=>x.id!='player').map(x=>({label:mob(x.id),n:x.n}));
+  b.append(who('Getötet von',[...byP,...byM].sort((x,y)=>y.n-x.n)));
+  b.append(who('Hat erwischt',pairs.filter(x=>x.killer==p.name).map(x=>({label:x.victim,n:x.n})).sort((x,y)=>y.n-x.n)));
+  a.append(img,b);return a;
+}
+function pairTable(pairs){
+  const w=$('pairs');
+  if(!pairs.length){w.append(el('p','empty','Noch niemand hat jemanden erwischt. Friedlich hier.'));return}
+  const t=el('table'),h=el('tr');
+  h.append(el('th',null,'Killer'),el('th',null,'Opfer'),el('th','c','Anzahl'));
+  const th=el('thead');th.append(h);const tb=el('tbody');
+  pairs.forEach(x=>{const r=el('tr');r.append(el('td',null,x.killer),el('td',null,x.victim),el('td','c',fmt(x.n)));tb.append(r)});
+  t.append(th,tb);w.append(t);
+}
+fetch('data/stats.json?'+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{
+  const ps=d.players||[],pairs=d.pairs||[];
+  const sum=k=>ps.reduce((s,p)=>s+(p[k]||0),0);
+  $('tiles').append(tile(fmt(ps.length),'Spieler'),tile(fmt(sum('deaths')),'Tode insgesamt'),tile(fmt(sum('playerKills')),'PvP-Kills'),tile(fmt(sum('diamondOre')),'Diamanterz abgebaut'),tile(fmt(Math.round(sum('hours')*10)/10),'Stunden gespielt'));
+  BOARDS.forEach(b=>$('boards').append(board(b,ps)));
+  pairTable(pairs);
+  [...ps].sort((a,b)=>b.hours-a.hours).forEach(p=>$('players').append(player(p,pairs)));
+  const me=ps.find(p=>p.name=='Lassino')||ps[0];
+  if(me){const h=$('hero');h.src=avatar(me,'body');h.alt='Skin von '+me.name;h.hidden=false}
+  $('stand').textContent='Stand: '+new Date(d.updated).toLocaleString('de-DE',{dateStyle:'medium',timeStyle:'short'})+' Uhr';
+}).catch(()=>{$('err').style.display='block'});
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{
+    "server":  "Elmo",
+    "updated":  "2026-11-08T15:02:25.1492573Z",
+    "players":  [
+                    {
+                        "uuid":  "e193b777-29a7-4c37-81c7-e53402d41203",
+                        "name":  "Lassino",
+                        "deaths":  0,
+                        "playerKills":  0,
+                        "mobKills":  0,
+                        "hours":  0.1,
+                        "damageDealt":  0,
+                        "damageTaken":  0,
+                        "jumps":  33,
+                        "elytraKm":  1.8,
+                        "walkKm":  0.1,
+                        "minedAll":  0,
+                        "diamondOre":  0,
+                        "diamondBlocks":  0,
+                        "diamondsInv":  0,
+                        "diamondsEnder":  0,
+                        "diamondsOwned":  0,
+                        "killedBy":  [
+
+                                     ],
+                        "killed":  [
+
+                                   ]
+                    }
+                ],
+    "pairs":  [
+
+              ]
+}
